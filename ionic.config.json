@@ -1,5 +1,7 @@
 {
   "name": "IndastryEntret",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

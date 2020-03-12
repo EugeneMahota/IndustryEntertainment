@@ -1,0 +1,26 @@
+.img-wrapper{
+  position: relative;
+  padding-top: 75%;
+  overflow: hidden;
+}
+
+.img-wrapper img{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  opacity: 0;
+}
+
+.img-wrapper.loaded img{
+  opacity: 1;
+  animation: image linear 150ms;
+}
+
+@keyframes image {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

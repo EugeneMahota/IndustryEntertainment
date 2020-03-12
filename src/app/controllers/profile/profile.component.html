@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-toolbar [color]="'primary'">
+        <ion-title>
+            Профиль
+        </ion-title>
+        <ion-buttons [slot]="'end'">
+            <ion-menu-button [autoHide]="false" [routerLink]="['edit']">
+                <ion-icon name="settings"></ion-icon>
+            </ion-menu-button>
+
+            <ion-menu-button [autoHide]="false" (click)="onExit()">
+                <ion-icon name="exit"></ion-icon>
+            </ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content *ngIf="!infoUser">
+    <app-loading></app-loading>
+</ion-content>
+
+<ion-content class="content" *ngIf="infoUser">
+
+    <ion-item [lines]="'none'">
+        <ion-avatar slot="start">
+            <img [src]="infoUser?.image || 'assets/icon/user.png'" class="image-profile">
+        </ion-avatar>
+        <div>
+            <h2 class="card-title">{{infoUser?.name || 'Пользователь_' + infoUser?.id}}</h2>
+            <div class="card-text">{{infoUser?.description || '-- Информация о компании или пользователе отсутствует --'}}</div>
+        </div>
+    </ion-item>
+
+
+    <ion-grid>
+        <ion-row>
+
+            <ion-col size="4" class="card ion-text-center" [routerLink]="['product']">
+                <ion-label>
+                    <h2 class="card-title">{{infoUser?.count_product || 0}}</h2>
+                    <div class="card-text">Товары</div>
+                </ion-label>
+            </ion-col>
+            <ion-col size="4" class="card ion-text-center" [routerLink]="['message']">
+                <ion-label>
+                    <h2 class="card-title">{{infoUser?.count_message || 0}}</h2>
+                    <div class="card-text">Сообщения</div>
+                </ion-label>
+            </ion-col>
+            <ion-col size="4" class="card ion-text-center" [routerLink]="['service']">
+                <ion-label>
+                    <h2 class="card-title">{{infoUser?.count_service || 0}}</h2>
+                    <div class="card-text">Услуги</div>
+                </ion-label>
+            </ion-col>
+
+        </ion-row>
+    </ion-grid>
+</ion-content>

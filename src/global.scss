@@ -24,3 +24,22 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.button-native {
+  &:active, &:focus {
+    outline: none;
+  }
+}
+
+.content {
+  animation: content linear 150ms!important;
+}
+
+@keyframes content {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

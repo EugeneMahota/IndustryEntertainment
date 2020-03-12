@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-toolbar [color]="'primary'">
+        <ion-title>
+            Новости
+        </ion-title>
+
+        <ion-menu-button [autoHide]="false" [slot]="'end'" (click)="ngOnInit()">
+            <ion-icon name="refresh"></ion-icon>
+        </ion-menu-button>
+    </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content class="content" *ngIf="listNews">
+    <ion-card *ngFor="let news of listNews" [routerLink]="news.id">
+
+        <app-image-loader *ngIf="news.image" [image]="news.image"></app-image-loader>
+
+        <ion-card-header>
+            <ion-card-subtitle>{{news.date | date:'dd MMM yyyy, HH:mm'}}</ion-card-subtitle>
+            <ion-card-title>{{news.name}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+            {{news.text}}
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>
+
+<ion-content *ngIf="!listNews">
+    <app-loading></app-loading>
+</ion-content>

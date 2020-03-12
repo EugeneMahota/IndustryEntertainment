@@ -1,0 +1,22 @@
+ion-avatar {
+  width: 85px;
+  height: 85px;
+}
+.image-profile {
+  object-fit: cover;
+  border-radius: 50%;
+}
+.card {
+  padding: 0.5rem 0;
+  &:focus {
+    outline: none;
+  }
+}
+
+.card-title {
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.card-text {
+  font-weight: 300;
+}

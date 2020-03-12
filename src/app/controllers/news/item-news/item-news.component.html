@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-toolbar [color]="'primary'">
+        <ion-back-button [slot]="'start'"></ion-back-button>
+        <ion-title>
+            Страница новости
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content *ngIf="itemNews">
+
+    <img *ngIf="itemNews.image" [src]="itemNews.image" class="card-image">
+    <ion-card-header>
+        <ion-card-subtitle>{{itemNews.date | date:'dd MMM yyyy, HH:mm'}}</ion-card-subtitle>
+        <ion-card-title>{{itemNews.name}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+        {{itemNews.text_long}}
+    </ion-card-content>
+</ion-content>
+
+<ion-content *ngIf="!itemNews">
+    <app-loading></app-loading>
+</ion-content>

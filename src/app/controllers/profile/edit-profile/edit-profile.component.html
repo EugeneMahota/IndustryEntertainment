@@ -1,0 +1,96 @@
+<ion-header>
+    <ion-toolbar [color]="'primary'">
+        <ion-back-button [slot]="'start'"></ion-back-button>
+        <ion-title>
+            Настройки профиля
+        </ion-title>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content #content>
+
+    <app-loading *ngIf="!userData"></app-loading>
+
+    <ion-segment *ngIf="userData" [color]="'primary'" [(ngModel)]="segment" (ionChange)="segmentChanged()">
+        <ion-segment-button [value]="0">
+            <ion-label>Данные</ion-label>
+        </ion-segment-button>
+        <ion-segment-button [value]="1">
+            <ion-label>Уведомления</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+
+
+    <ion-slides pager="false" [options]="slideOpts" #slider (ionSlideTransitionEnd)="slideChanged()" [formGroup]="formUser" class="content">
+        <ion-slide *ngIf="userData">
+            <ion-grid class="ion-padding">
+
+                <ion-item *ngIf="pathImage" [lines]="'none'" class="ion-text-center ion-margin-bottom">
+                    <img [src]="pathImage" class="image-profile">
+                </ion-item>
+
+                <ion-button [fill]="'clear'" (click)="checkFile()">
+                    {{imageProfile ? 'выбрать другое фото' : 'загрузить Фото профиля'}}
+                </ion-button>
+
+                <ion-item>
+                    <ion-label position="floating">Имя</ion-label>
+                    <ion-input type="string" formControlName="name"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating">Телефон</ion-label>
+                    <ion-input type="number" formControlName="phone"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating">Email</ion-label>
+                    <ion-input type="email" formControlName="email"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating">Сайт</ion-label>
+                    <ion-input type="string" formControlName="url"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating">Описание профиля</ion-label>
+                    <ion-textarea type="string" rows="5" formControlName="description"></ion-textarea>
+                </ion-item>
+
+
+            </ion-grid>
+        </ion-slide>
+
+        <ion-slide *ngIf="userData">
+            <ion-grid>
+                <ion-item>
+                    <ion-label>Запомнить логин</ion-label>
+                    <ion-checkbox slot="end" formControlName="autologin"></ion-checkbox>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Push-уведомления с форума</ion-label>
+                    <ion-checkbox slot="end" formControlName="push_forum"></ion-checkbox>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Push-уведомления о новостях</ion-label>
+                    <ion-checkbox slot="end" formControlName="push_smm"></ion-checkbox>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Push-уведомления о сообщениях</ion-label>
+                    <ion-checkbox slot="end" formControlName="push_news"></ion-checkbox>
+                </ion-item>
+            </ion-grid>
+        </ion-slide>
+    </ion-slides>
+
+</ion-content>
+
+<ion-button *ngIf="userData" [color]="'primary'" [size]="'default'" [fill]="'solid'" [expand]="'block'" class="ion-margin"
+            (click)="editUser(formUser.value); updateSettings(formUser.value)">
+    Сохранить
+</ion-button>

@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar [color]="'primary'">
+    <ion-menu-button [slot]="'start'" [autoHide]="false" [routerLink]="['../../../']">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-menu-button>
+    <ion-title>
+      Мои сообщения
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <app-loading *ngIf="!listMessage"></app-loading>
+
+  <ion-item *ngFor="let user of listMessage" [ngClass]="user.fl === 1 ? 'active-message':''" [routerLink]="user.id">
+    <ion-avatar slot="start">
+      <img [src]="user.image || 'assets/icon/user.png'">
+    </ion-avatar>
+    <ion-label>
+      <h2 class="title-list">{{user.name || 'Пользователь_' + user.id}}</h2>
+      <div class="text-list">{{user.text}}</div>
+      <small class="small-text-list">{{user.date | date:'dd MMM yyyy, HH:mm'}}</small>
+    </ion-label>
+  </ion-item>
+
+</ion-content>

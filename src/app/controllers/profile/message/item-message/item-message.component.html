@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-toolbar [color]="'primary'">
+        <ion-menu-button [slot]="'start'" [autoHide]="false" [routerLink]="['../']">
+            <ion-icon name="arrow-back"></ion-icon>
+        </ion-menu-button>
+
+        <ion-item *ngIf="user" [color]="'primary'" [slot]="'start'" [lines]="'none'">
+            <ion-avatar [slot]="'start'">
+                <img [src]="user?.image || 'assets/icon/user.png'">
+            </ion-avatar>
+            <ion-title class="ion-no-padding">
+                {{user?.name || 'Пользователь_' + userId}}
+            </ion-title>
+        </ion-item>
+
+        <ion-menu-button [autoHide]="false" [slot]="'end'" (click)="getListMessage()">
+            <ion-icon name="refresh"></ion-icon>
+        </ion-menu-button>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-bottom" #content>
+    <app-loading *ngIf="!listMessage"></app-loading>
+
+    <ion-item [lines]="'none'" *ngFor="let message of listMessage">
+        <div [ngClass]="userId !== message.user_send ? 'message-right':''">
+            <div class="message ion-margin-top">
+
+                <div class="text-message">
+                    {{message.text}}
+                    <ion-icon *ngIf="message.fl === 0" name="checkmark" [color]="'primary'"></ion-icon>
+                </div>
+
+                <ion-card *ngIf="message?.service_or_product?.id">
+                    <img *ngIf="message?.service_or_product?.image" [src]="message?.service_or_product?.image"
+                         class="image-message">
+                    <ion-card-header>
+                        <ion-card-subtitle>
+                            {{message?.service_or_product?.name}}
+                        </ion-card-subtitle>
+                    </ion-card-header>
+                </ion-card>
+
+                <small class="date-message">{{message.date | date:'dd MMM yyyy, HH:mm'}}</small>
+            </div>
+        </div>
+    </ion-item>
+</ion-content>
+
+<ion-toolbar class="bottom-toolbar" [formGroup]="formMessage">
+    <ion-item [lines]="'none'">
+        <ion-input formControlName="message" [placeholder]="'Сообщение'" (ionFocus)="scrollToBottom()"></ion-input>
+    </ion-item>
+    <ion-menu-button [autoHide]="false" [slot]="'end'" (click)="sendMessage(); formMessage.reset()">
+        <ion-icon name="send"></ion-icon>
+    </ion-menu-button>
+</ion-toolbar>

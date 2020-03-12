@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar [color]="'primary'">
+    <ion-back-button [slot]="'start'"></ion-back-button>
+    <ion-title>Список услуг</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let service of listService" [routerLink]="[service.id]">
+    <app-image-loader *ngIf="service.image" [image]="service.image"></app-image-loader>
+    <ion-card-header>
+      <ion-card-title>{{service.name}}</ion-card-title>
+      <ion-card-subtitle>{{service.price | currency:'RUB':' ':'1.0-0'}} ₽</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{service.text}}
+    </ion-card-content>
+  </ion-card>
+</ion-content>

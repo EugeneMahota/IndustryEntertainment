@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar [color]="'primary'">
+        <ion-title>
+            Авторизация
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding" [formGroup]="formLogin">
+    <ion-item>
+        <ion-label position="floating">Email или телефон</ion-label>
+        <ion-input type="string" formControlName="login"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Пароль</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-item [lines]="'none'">
+        <ion-button [size]="'small'" [fill]="'clear'" [color]="'primary'" [routerLink]="['../reset-password']">
+            Забыли пароль?
+        </ion-button>
+    </ion-item>
+
+</ion-content>
+
+<ion-button [color]="'primary'" [size]="'default'" [fill]="'solid'" [expand]="'block'" (click)="login()" class="ion-margin-bottom ion-margin-end ion-margin-start">
+    Войти
+</ion-button>
+
+
+<ion-button [color]="'primary'" [size]="'default'" [fill]="'outline'" [routerLink]="['../register']" class="ion-margin-bottom ion-margin-end ion-margin-start">
+  Регистрация
+</ion-button>
+
+<ion-button [color]="'primary'" [size]="'default'" [fill]="'outline'" [routerLink]="['../fast-register']" class="ion-margin-bottom ion-margin-end ion-margin-start">
+    Быстрая регистрация
+</ion-button>

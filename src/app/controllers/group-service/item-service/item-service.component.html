@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar [color]="'primary'">
+        <ion-back-button [slot]="'start'"></ion-back-button>
+        <ion-title>Страница услуги</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="itemService">
+    <img *ngIf="headerImage" [src]="headerImage.url" class="headerImage" (swipeLeft)="nextPhoto()" (swipeRight)="prevPhoto()">
+
+
+    <div class="block-inline" *ngIf="listImage && listImage.length > 1">
+        <div class="item-inline" *ngFor="let image of listImage" (click)="headerImage = image"
+             [ngClass]="headerImage.url === image.url ? 'active-image':''">
+            <div class="card">
+
+                <img class="image" [src]="image.url">
+                <div class="width"></div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <ion-card-header>
+        <ion-card-title>{{itemService.name}}</ion-card-title>
+        <ion-card-subtitle>{{itemService.price | currency:'RUB':' ':'1.0-0'}} ₽</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+        {{itemService.text}}
+    </ion-card-content>
+
+    <ion-item [lines]="'none'" class="ion-padding-bottom">
+        <ion-button [color]="'primary'" [size]="'default'" [routerLink]="[itemService.user_id]">Контактные данные</ion-button>
+    </ion-item>
+</ion-content>
